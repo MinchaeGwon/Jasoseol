@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자소설 닷컴</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="make_jss">
+        
+            <div class="plus_btn">
+                <a href="{% url 'create' %}"> + </a>
+            </div>
+    
+        <p>자기소개서 작성</p>
+    </div>
+
+    {% for jss in all_jss %}
+        <div class="all_jss">
+            <p>{{jss.title}}</p>
+            <p>{{jss.content}}</p>
+            <p>{{jss.updated_at|date:"Y-m-d"}}</p>
+        </div>
+    {% endfor %}
+    
+</body>
+</html>
