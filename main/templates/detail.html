@@ -1,0 +1,34 @@
+{{my_jss.id}}번째 글입니다.
+<br>
+제목 : {{my_jss.title}}
+<br>
+내용 : {{my_jss.content}}
+<br>
+생성시간 : {{my_jss.updated_at|date:"Y-m-d"}}
+
+<br>
+{% if user == my_jss.author %}
+    <a href="{% url 'update' my_jss.id%}"><button>수정</button></a>
+    <a href="{% url 'delete' my_jss.id%}"><button>삭제</button></a>
+{% endif %}
+
+
+{% if user.is_authenticated %}
+    <form method="POST" action="{% url 'create_comment' my_jss.id %}">
+        {% csrf_token %}
+        {{comment_form}}
+        <input type="submit" value="확인">
+    </form>
+{% endif %}
+
+{% for comment in my_jss.comment_set.all %}
+    <p>
+        {{comment.content}} 🔊 {{comment.author}}
+        
+        {% if user == comment.author %}
+            <a href="{% url 'delete_comment' my_jss.id comment.id %}">
+                <button>삭제</button>
+            </a>
+        {% endif %}
+    </p>
+{% endfor %}
