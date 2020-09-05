@@ -1,34 +1,58 @@
-{{my_jss.id}}번째 글입니다.
-<br>
-제목 : {{my_jss.title}}
-<br>
-내용 : {{my_jss.content}}
-<br>
-생성시간 : {{my_jss.updated_at|date:"Y-m-d"}}
+{% extends 'base.html' %}
+{% load static %}
 
-<br>
-{% if user == my_jss.author %}
-    <a href="{% url 'update' my_jss.id%}"><button>수정</button></a>
-    <a href="{% url 'delete' my_jss.id%}"><button>삭제</button></a>
-{% endif %}
+{% block title %}자기소개서 보기{% endblock %}
+{% block link %}{% static 'css/detail.css' %}{% endblock %}
 
+{% block content %}
 
-{% if user.is_authenticated %}
-    <form method="POST" action="{% url 'create_comment' my_jss.id %}">
-        {% csrf_token %}
-        {{comment_form}}
-        <input type="submit" value="확인">
-    </form>
-{% endif %}
+<div align="center">
+    <div class="detail_jss">
+        <table>
+            <tr>
+                <td id="draw_hr">
+                    <h2>{{my_jss.title}}</h2>
+                    <p class="jss_time">생성시간 : {{my_jss.updated_at|date:"Y-m-d"}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="jss_content">{{my_jss.content}}</p>
+                </td>
+            </tr>
+        </table>
 
-{% for comment in my_jss.comment_set.all %}
-    <p>
-        {{comment.content}} 🔊 {{comment.author}}
-        
-        {% if user == comment.author %}
-            <a href="{% url 'delete_comment' my_jss.id comment.id %}">
-                <button>삭제</button>
-            </a>
+        <br>
+
+        {% if user == my_jss.author %}
+        <p id="draw_hr" style="padding-bottom: 20px;">
+            <a href="{% url 'update' my_jss.id%}"><img class="fix" src="{% static 'images/fix.png' %}"></a>
+            <a href="{% url 'delete' my_jss.id%}"><img src="{% static 'images/delete.png' %}"></a>
+        </p>
         {% endif %}
-    </p>
-{% endfor %}
+
+        <div class="comment">
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'create_comment' my_jss.id %}">
+                {% csrf_token %}
+                {{comment_form}}
+                <button type="submit"><img class="check" src="{% static 'images/check.png' %}"></button>
+            </form>
+            {% endif %}
+
+            {% for comment in my_jss.comment_set.all %}
+            <p>
+                {{comment.author}} 🔊 {{comment.content}}
+
+                {% if user == comment.author %}
+                <a href="{% url 'delete_comment' my_jss.id comment.id %}">
+                    <img class="comment_delete" src="{% static 'images/delete.png' %}">
+                </a>
+                {% endif %}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

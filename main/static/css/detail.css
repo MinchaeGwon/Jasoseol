@@ -1,0 +1,57 @@
+.detail_jss {
+    width: 700px;
+    border: 3px solid #ACA9A9;
+    border-radius: 10px;
+    margin-top: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    font-family: 'Handon3gyeopsal300g';
+}
+
+h2 {
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.jss_time {
+    float: right;
+    font-size: 13px;
+    color: #818699;
+    margin-right: 10px;
+}
+
+#draw_hr {
+    border-bottom: 3px dashed #535151;
+    width: 680px;
+}
+
+#jss_content {
+    margin-top: 15px;
+}
+
+.comment {
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+}
+
+form {
+    margin-bottom: 10px;
+}
+
+.fix {
+    padding-right: 25px;
+}
+
+.comment_delete, .check {
+    width: 22px;
+    height: 22px;
+}
+
+button {
+    background-color: #FBFBF7;
+    border: none;
+}

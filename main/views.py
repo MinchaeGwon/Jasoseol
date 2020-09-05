@@ -3,12 +3,18 @@ from .forms import JssForm, CommentForm
 from .models import Jasoseol, Comment
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 #from django.http import Http404
 
 def home(request):
     all_jss = Jasoseol.objects.all()
 
-    return render(request, 'home.html', {'all_jss':all_jss})
+    jss_list = Jasoseol.objects.all()
+    paginator = Paginator(jss_list, 4)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+
+    return render(request, 'home.html', {'all_jss':all_jss, 'posts':posts})
 
 @login_required(login_url='/login/')
 def my_index(request):
@@ -43,8 +49,6 @@ def detail(request, jss_id):
     my_jss = get_object_or_404(Jasoseol, pk=jss_id)
     comment_form = CommentForm();
 
-
-
     return render(request, 'detail.html', {'my_jss':my_jss, 'comment_form':comment_form})
 
 def delete(request, jss_id):
@@ -77,6 +81,7 @@ def create_comment(request, jss_id):
         temp_form.author = request.user
         temp_form.jasoseol = Jasoseol.objects.get(pk=jss_id)
         temp_form.save()
+        
         return redirect('detail', jss_id)
 
 def delete_comment(request, jss_id, comment_id):

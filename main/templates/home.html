@@ -6,27 +6,30 @@
 
 {% block content %}
 
-<div align="center">
+<div class="jss_btn" align="center">
     {% if user.is_authenticated %}
     <a href="{% url 'my_index' %}">
-        <button>내 자기소개서만 보기</button>
+        <button>내 자기소개서 보기</button>
     </a>
+    &nbsp;
     <a href="{% url 'home' %}">
         <button>모든 자기소개서 보기</button>
     </a>
     {% endif %}
-    
-    <br>
-    
+
+    <br><br>
+</div>
+
+<div align="center">
     <table>
         <tr>
-            {% for jss in all_jss %}
+            {% for jss in posts %}
             <td>
                 <a href="{% url 'detail' jss.id%}">
                     <div class="all_jss">
                         <p>{{jss.author}}</p>
                         <p>{{jss.title}}</p>
-                        <p>{{jss.content}}</p>
+                        <p>{{jss.summary}}</p>
                         <p>{{jss.updated_at|date:"Y-m-d"}}</p>
                     </div>
                 </a>
@@ -34,6 +37,21 @@
             {% endfor %}
         </tr>
     </table>
+
+    {% if posts.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    <!-- 현재 보고 있는 페이지를 가리킴 -->
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}">Next</a>
+    <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {% endif %}
 </div>
 
 {% endblock %}

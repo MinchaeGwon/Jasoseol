@@ -1,21 +1,27 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자기소개서 작성</title>
-</head>
-<body>
+{% block title %}자기소개서 작성{% endblock %}
+{% block link %}{% static 'css/create.css' %}{% endblock %}
+
+{% block content %}
+
+<div align="center">
+    <h2>자기소개서 작성</h2>
+
     <form method="POST" action="">
         {% csrf_token %}
-        {{jss_form.as_p}}
-        <input type="submit" value="확인">
+        <div class="create_jss">
+            <table>
+                {{jss_form.as_table}}
+            </table>
+
+            <div class="counted_text">글자 수 : </div>
+            <script src="{% static 'js/count.js' %}"></script>
+        </div>
+
+        <button type="submit"><img src="{% static 'images/check.png' %}"></button>
     </form>
+</div>
 
-    글자 수 : <div class="counted_text"></div>
-
-    <script src="{% static 'js/count.js' %}"></script>
-</body>
-</html>
+{% endblock %}
