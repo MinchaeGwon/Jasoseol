@@ -1,0 +1,22 @@
+.login {
+    width: 300px;
+    margin: auto;
+    padding: 15px;
+    border: 3px solid #ACA9A9;
+    border-radius: 10px;
+    font-family: 'Handon3gyeopsal300g';
+    text-align: center;
+}
+h2 {
+    text-align: center;
+    font-family: 'Handon3gyeopsal300g';
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.submit_btn {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'JSDongkang-Regular';
+}
