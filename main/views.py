@@ -14,9 +14,8 @@ def home(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
-    return render(request, 'home.html', {'all_jss':all_jss, 'posts':posts})
+    return render(request, 'home.html', {'all_jss':posts})
 
-@login_required(login_url='/login/')
 def my_index(request):
     my_jss = Jasoseol.objects.filter(author=request.user)
     return render(request, 'home.html', {'all_jss':my_jss})

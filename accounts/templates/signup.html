@@ -1,8 +1,23 @@
-<h1>회원가입 페이지</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<form method="POST" action="">
-    {% csrf_token %}
+{% block title %}회원가입{% endblock %}
+{% block link %}{% static 'css/signup.css' %}{% endblock %}
 
-    {{regi_form.as_p}}
-    <input type="submit" value="회원가입">
-</form>
+
+{% block content %}
+
+<h2>회원가입</h2>
+
+<div class="signup">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{regi_form.as_p}}
+
+        <div class="submit_btn">
+            <input id="submit_btn" type="submit" value="회원가입">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

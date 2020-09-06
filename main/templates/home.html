@@ -23,7 +23,7 @@
 <div align="center">
     <table>
         <tr>
-            {% for jss in posts %}
+            {% for jss in all_jss %}
             <td>
                 <a href="{% url 'detail' jss.id%}">
                     <div class="all_jss">
@@ -38,19 +38,19 @@
         </tr>
     </table>
 
-    {% if posts.has_previous %}
+    {% if all_jss.has_previous %}
     <a href="?page=1">First</a>
     <a href="?page={{posts.previous_page_number}}">Previous</a>
     {% endif %}
 
     <!-- 현재 보고 있는 페이지를 가리킴 -->
-    <span>{{posts.number}}</span>
+    <span>{{all_jss.number}}</span>
     <span>of</span>
-    <span>{{posts.paginator.num_pages}}</span>
+    <span>{{all_jss.paginator.num_pages}}</span>
 
-    {% if posts.has_next %}
-    <a href="?page={{posts.next_page_number}}">Next</a>
-    <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {% if all_jss.has_next %}
+    <a href="?page={{all_jss.next_page_number}}">Next</a>
+    <a href="?page={{all_jss.paginator.num_pages}}">Last</a>
     {% endif %}
 </div>
 

@@ -1,7 +1,23 @@
-<h1>로그인 페이지</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="로그인">
-</form>
+{% block title %}로그인{% endblock %}
+{% block link %}{% static 'css/login.css' %}{% endblock %}
+
+
+{% block content %}
+
+<h2>로그인</h2>
+
+<div class="login">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <div class="submit_btn">
+            <input type="submit" value="로그인">
+        </div>
+    </form>
+</div>
+
+{% endblock %}
